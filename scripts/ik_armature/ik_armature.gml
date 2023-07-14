@@ -55,20 +55,15 @@ function ik_armature(points) constructor {
 
 		//Check if we have enough length
 		if (length() >= point_distance(start_pos.x, start_pos.y, end_pos.x, end_pos.y)) {
-			//show_debug_message("Performing IK");
-			//Enough length to do calculations
-			//Check against our threshold
-			//Update end point coords for while loop
-			
-			var point_start_pos = point_start(),
-				point_end_pos = point_end()
+			// Enough length to do calculations
+			// Check against our threshold
+			// Update end point coords for while loop
 	
 			var c=0;
-			while ((point_distance(start_pos.x, start_pos.y, point_start_pos.x, point_start_pos.y)) >= tolerance ||
-				   point_distance(end_pos.x, end_pos.y, point_end_pos.x, point_end_pos.y) >= tolerance) && c<1000 {
+			while ((point_distance(start_pos.x, start_pos.y, point_start().x, point_start().y)) >= tolerance ||
+				   point_distance(end_pos.x, end_pos.y, point_end().x, point_end().y) >= tolerance) && c<1000 {
 		
 				//Start from the end point, move it to the target (end - start)
-				//*
 				for(var i=array_length(points)-1; i>=0; --i) {
 					if (i == array_length(points)-1) {
 						//Set armature end point to the new end point
@@ -86,11 +81,8 @@ function ik_armature(points) constructor {
 						point.x = point_next.x + lengthdir_x(point_next.length, next_point_dir + 180)
 						point.y = point_next.y + lengthdir_y(point_next.length, next_point_dir + 180);
 					}
-				}
-				//*/
-		
-		
-				//*
+				}		
+						
 				//Now do the same, but in the opposite direction (start - end)
 				for(var i=0; i<array_length(points); i++) {
 					if (i == 0) {
@@ -111,14 +103,13 @@ function ik_armature(points) constructor {
 						point.y = point_prev.y + lengthdir_y(point.length, next_point_dir);
 					}
 				}
-				//*/
 		
 				c++;
 			}
 			//show_debug_message("Iteration for IK: " + string(c));
 		} else {
 			//show_debug_message("Points too far");
-			//We'll just make it straight
+			// We'll just make it straight
 	
 			var end_point_dir = point_direction(start_pos.x, start_pos.y, end_pos.x, end_pos.y);
 			
