@@ -13,7 +13,7 @@ for (var i=0; i<point_count; i++) {
 		//Set our initial direction instead for first point
 		ang = irandom_range(-180, 180);
 	} else {
-		// Set the point somewhere else
+		// Set the point as an offset from the previous point
 		ang += irandom_range(-60, 60);
 		pos = {x: pos.x + lengthdir_x(len, ang), y: pos.y + lengthdir_y(len, ang)};
 	}
