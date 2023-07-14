@@ -21,28 +21,16 @@ for (var i=0; i<point_count; i++) {
 	
 	array_push(points, new ik_point(pos.x, pos.y, len))
 }
-armature = new ik_armature([]);
-
-array_foreach(points, function(point) {
-	armature.point_push(point);
-})
-
-show_debug_message("Armature length: " + string(armature.length));
-
-show_debug_message("Armature length: " + string(armature.length) + "first point len:" + string(points[0].length));
-
-
+armature = new ik_armature(points);
 #endregion
 
 #region IK Interaction (up to you how you want it set it up)
-//*
-//* Settings for clicking**/ 
-//*
+//* Settings for clicking */ 
 point_range = 16; //Range for clicking on IK points to drag around
 point_clicked = false;
 point_other_end = {x: 0, y: 0}
 
-//Distance calculation
+//* Distance Calculation */ 
 point_at = [0,0];
 point_at_clicked = false;
 #endregion
